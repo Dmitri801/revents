@@ -4,11 +4,11 @@ import EventListAttendee from './EventListAttendee';
 
 class EventListItem extends Component {
   render() {
-    const {event} = this.props;
+    const {event, onEventOpen, deleteEvent } = this.props;
     return <div>
         <Segment.Group> 
           <Segment>
-            <Item.Group>
+            <Item.Group> 
               <Item>
                 <Item.Image size="tiny" circular src={event.hostPhotoURL} />
                 <Item.Content>
@@ -35,7 +35,12 @@ class EventListItem extends Component {
           </Segment>
           <Segment clearing>
           <span>{event.descirption}</span>
-            <Button as="a" color="teal" floated="right" content="View" />
+            <Button as="a" color="teal" floated="right" 
+            onClick={onEventOpen(event)}
+            content="View" />
+          <Button as="a" color="red" floated="right"
+            onClick={deleteEvent(event.id)}
+            content="Delete" />
           </Segment>
         </Segment.Group>
       </div>;
