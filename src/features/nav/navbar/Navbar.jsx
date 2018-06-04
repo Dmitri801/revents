@@ -12,7 +12,7 @@ class Navbar extends Component {
     this.setState({ authenticated: true })
   }
 
-  handleSignOut = () => {
+  handleSignOut = () => { 
     this.setState({ authenticated: false })
     this.props.history.push('/');
   }
@@ -27,7 +27,7 @@ class Navbar extends Component {
           <Menu.Item as={NavLink} to="/events" name="Events" />
           {authenticated && <Menu.Item as={NavLink} to="/people" name="People" />}
           {authenticated && <Menu.Item>
-            <Button as={Link} to="create-event" floated="right" positive inverted content="Create Event" />
+            <Button as={Link} to="/create-event" floated="right" positive inverted content="Create Event" />
           </Menu.Item>}
             {authenticated ? <SignedInMenu signOut={this.handleSignOut}/>
             :

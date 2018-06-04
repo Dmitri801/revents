@@ -7,6 +7,7 @@ import EventDetailedHeader from "./EventDetailedHeader";
 import EventDetailedChat from "./EventDetailedChat";
 
 const EventDetailedPage = ({event}) => {
+  console.log(event.attendees);
   return (
     <Grid>
       <Grid.Column width={10}>
@@ -19,7 +20,7 @@ const EventDetailedPage = ({event}) => {
       </Grid.Column>  
     </Grid>
   )
-}
+} 
 
 export const mapStateToProps = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
