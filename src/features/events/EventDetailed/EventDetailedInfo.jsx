@@ -1,9 +1,22 @@
-import React from 'react';
-import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
+import React, { Component } from "react";
+import { Segment, Grid, Icon, Button } from "semantic-ui-react";
+import EventDetailedMap from "./EventDetailedMap";
 
-const EventDetailedInfo = ({event}) => {
-  return (
-       <Segment.Group>
+class EventDetailedInfo extends Component {
+  state = {
+    showMap: false
+  };
+
+  showMapToggle = () => {
+    this.setState(prevState => ({
+      showMap: !prevState.showMap
+    }));
+  };
+  render() {
+    const { event } = this.props;
+    return (
+      <div>
+        <Segment.Group>
           <Segment attached="top">
             <Grid>
               <Grid.Column width={1}>
@@ -33,12 +46,27 @@ const EventDetailedInfo = ({event}) => {
                 <span>{event.venue}</span>
               </Grid.Column>
               <Grid.Column width={4}>
-                <Button color="teal" size="tiny" content="Show Map" />
+                <Button
+                  color="teal"
+                  size="tiny"
+                  content={
+                    this.state.showMap === true ? "Hide Map" : "Show Map"
+                  }
+                  onClick={this.showMapToggle}
+                />
               </Grid.Column>
             </Grid>
           </Segment>
+          {this.state.showMap && (
+            <EventDetailedMap
+              lat={event.venueLatLng.lat}
+              lng={event.venueLatLng.lng}
+            />
+          )}
         </Segment.Group>
-  )
+      </div>
+    );
+  }
 }
 
-export default EventDetailedInfo
+export default EventDetailedInfo;

@@ -1,23 +1,26 @@
-
 import { DELETE_EVENT, UPDATE_EVENT, CREATE_EVENT } from "./eventConstants";
 
 const initialState = [
   {
     id: "1",
-    title: "Trip to Tower of London",
-    date: "2018-03-27",
+    title: "Trip to Empire State building",
+    date: "2018-03-21",
     category: "culture",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
-    city: "London, UK",
-    venue: "Tower of London, St Katharine's & Wapping, London",
+    city: "NY, USA",
+    venue: "Empire State Building, 5th Avenue, New York, NY, USA",
+    venueLatLng: {
+      lat: 40.7484405,
+      lng: -73.98566440000002
+    },
     hostedBy: "Bob",
     hostPhotoURL: "https://randomuser.me/api/portraits/men/20.jpg",
     attendees: [
       {
-        id: "a", 
+        id: "a",
         name: "Bob",
-        photoURL: "https://randomuser.me/api/portraits/women/20.jpg"
+        photoURL: "https://randomuser.me/api/portraits/men/20.jpg"
       },
       {
         id: "b",
@@ -29,42 +32,46 @@ const initialState = [
   {
     id: "2",
     title: "Trip to Punch and Judy Pub",
-    date: "2018-03-28",
+    date: "2018-03-18",
     category: "drinks",
-    description: 
+    description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "London, UK",
     venue: "Punch & Judy, Henrietta Street, London, UK",
-    hostedBy: "Serenity",
-    hostPhotoURL: "https://randomuser.me/api/portraits/women/22.jpg",
+    venueLatLng: {
+      lat: 51.5118074,
+      lng: -0.12300089999996544
+    },
+    hostedBy: "Tom",
+    hostPhotoURL: "https://randomuser.me/api/portraits/men/22.jpg",
     attendees: [
+      {
+        id: "a",
+        name: "Bob",
+        photoURL: "https://randomuser.me/api/portraits/men/20.jpg"
+      },
       {
         id: "b",
         name: "Tom",
         photoURL: "https://randomuser.me/api/portraits/men/22.jpg"
-      },
-      {
-        id: "a",
-        name: "Janet",
-        photoURL: "https://randomuser.me/api/portraits/women/29.jpg"
       }
     ]
   }
-]; 
+];
 
 export const eventReducer = (state = initialState, action) => {
-  let newState = [ ...state ];
-  switch(action.type) {
+  let newState = [...state];
+  switch (action.type) {
     case CREATE_EVENT:
-      return [...newState, Object.assign({}, action.payload.event)]
+      return [...newState, Object.assign({}, action.payload.event)];
     case UPDATE_EVENT:
       return [
         ...newState.filter(event => event.id !== action.payload.event.id),
         Object.assign({}, action.payload.event)
-      ]
+      ];
     case DELETE_EVENT:
-      return [...newState.filter(event => event.id !== action.payload.eventId)]
+      return [...newState.filter(event => event.id !== action.payload.eventId)];
     default:
-      return state
+      return state;
   }
-}
+};
