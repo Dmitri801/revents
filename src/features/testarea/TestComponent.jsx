@@ -7,7 +7,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
-import { incrementCounter, decrementCounter } from "./testActions";
+import { incrementAsync, decrementAsync } from "./testActions";
 
 class TestComponent extends Component {
   static defaultProps = {
@@ -42,13 +42,23 @@ class TestComponent extends Component {
       value: this.state.address,
       onChange: this.onChange
     };
-    const { incrementCounter, decrementCounter, openModal } = this.props;
+    const { incrementAsync, decrementAsync, openModal, loading } = this.props;
     return (
       <div>
         <h1>Test Area</h1>
         <h3>The answer is: {this.props.data}</h3>
-        <Button onClick={incrementCounter} color="green" content="Increment" />
-        <Button onClick={decrementCounter} color="red" content="Decrement" />
+        <Button
+          onClick={incrementAsync}
+          color="green"
+          content="Increment"
+          loading={loading}
+        />
+        <Button
+          onClick={decrementAsync}
+          color="red"
+          content="Decrement"
+          loading={loading}
+        />
         <Button
           onClick={() => openModal("TestModal", { data: 43 })}
           color="teal"
@@ -68,10 +78,11 @@ class TestComponent extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.test.data
+  data: state.test.data,
+  loading: state.test.loading
 });
 
 export default connect(
   mapStateToProps,
-  { incrementCounter, decrementCounter, openModal }
+  { incrementAsync, decrementAsync, openModal }
 )(TestComponent);
