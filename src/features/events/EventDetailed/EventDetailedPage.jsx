@@ -7,7 +7,6 @@ import EventDetailedHeader from "./EventDetailedHeader";
 import EventDetailedChat from "./EventDetailedChat";
 
 const EventDetailedPage = ({ event }) => {
-  console.log(event.attendees);
   return (
     <Grid>
       <Grid.Column width={10}>
